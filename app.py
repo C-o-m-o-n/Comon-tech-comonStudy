@@ -6,6 +6,16 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LinearRegression
 import time  # Import the time module for simulation
 import altair as alt
+import google.generativeai as genai
+
+with open('.env') as f:
+    env_content = f.read()
+
+GEMINI_API_KEY = env_content.split('GEMINI_API_KEY=')[1].strip()
+#set genai api key
+genai.configure(api_key=GEMINI_API_KEY)
+
+model = genai.GenerativeModel('gemini-pro')
 
 #create header with title and time
 
@@ -28,7 +38,6 @@ with st.sidebar:
     for task in tasks:
         task_goals[task] = st.number_input(f"Set goal for {task} (minutes):", min_value=1, max_value=240, value=30)
 
-        
     # Spacer to separate study goals from the AI assistant section
     st.sidebar.markdown("---")
 
@@ -36,7 +45,12 @@ with st.sidebar:
     st.sidebar.title("AI Assistant Chatbox")
 
     # Chatbox input
+ 
     user_query = st.sidebar.text_area("Ask me anything:")
+    if user_query:
+        input = model.generate_content(f"{user_query}")
+        output = input.candidates[0].content.parts[0].text  
+
 
     # Add a button to send the query to the AI assistant
     if st.sidebar.button("Send"):
@@ -45,8 +59,9 @@ with st.sidebar:
         with st.spinner("Processing..."):
             # Simulate processing time (replace this with your actual AI processing logic)
             time.sleep(2)
-        ai_response = "get_ai_assistant_response(user_query)"  # Replace with your actual function
-        st.sidebar.text(f"AI Assistant: {ai_response}")
+        # ai_response = "get_ai_assistant_response(user_query)"
+        st.sidebar.write(f"outBard-->: { output}")
+        # print(output)
 
 
 # Second column: 
