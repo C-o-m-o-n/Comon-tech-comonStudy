@@ -9,7 +9,7 @@ import altair as alt
 import google.generativeai as genai
 
 
-GEMINI_API_KEY = st.secrets["db_username"]
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 
 # with open('env') as f:
 #     env_content = f.read()
