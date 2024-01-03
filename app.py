@@ -8,7 +8,7 @@ import time  # Import the time module for simulation
 import altair as alt
 import google.generativeai as genai
 
-with open('.env') as f:
+with open('env') as f:
     env_content = f.read()
 
 GEMINI_API_KEY = env_content.split('GEMINI_API_KEY=')[1].strip()
