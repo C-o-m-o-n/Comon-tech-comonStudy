@@ -8,7 +8,6 @@ import time  # Import the time module for simulation
 import altair as alt
 import google.generativeai as genai
 
-
 GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 
 # with open('env') as f:
@@ -32,11 +31,7 @@ with st.sidebar:
                            ["Math", "Physics", "History", "English", "Python", "javaScript", "Other"])
     goals = st.number_input("Set your overall study goal (minutes):", 
                             min_value=1, max_value=1440, value=60)
-    
-    
 
-
-    
      # Set individual task goals
     task_goals = {}
     for task in tasks:
@@ -64,7 +59,7 @@ with st.sidebar:
             # Simulate processing time (replace this with your actual AI processing logic)
             time.sleep(2)
         # ai_response = "get_ai_assistant_response(user_query)"
-        st.sidebar.write(f"outBard-->: { output}")
+        st.sidebar.write(f"outBard -->: { output}")
         # print(output)
 
 
